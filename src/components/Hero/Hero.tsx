@@ -1,3 +1,7 @@
+import Cloud from "../SvgComponents/Cloud";
+import ReportSvg from "../SvgComponents/Report";
+import Support from "../SvgComponents/Support";
+
 const Hero = () => {
   return (
     <div className="flex flex-col items-center justify-center bg-white/95">
@@ -74,11 +78,83 @@ const Hero = () => {
             />
           </div>
         </div>
-        <h3 className="text-2xl text-center p-6">
+        <h3 className="text-2xl text-center p-6 mt-3 ">
           Join Plyn today and transform the way you manage tasks and tickets.
           It's more than a platform—it's <br /> the partner you need to achieve
           project excellence.
         </h3>
+      </section>
+
+      <section className="rounded-lg shadow-lg py-12 px-16 w-full max-w-6xl mx-auto text-center bg-white border border-gray-300">
+        <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center mb-12">
+            <h1 className="text-6xl mb-16">Control in one place</h1>
+            <i className="fa-solid fa-cloud"></i>
+            <p className="mb-12 text-center">
+              Unlock a seamless orchestration of tasks and tickets with Plyn,
+              the quintessential platform where efficiency meets innovation. Our
+              suite offers an unrivaled blend of tools that empower you to steer
+              your project's journey towards excellence with ease and precision.
+              At Plyn, we understand the complexities that come with project
+              management. That's why we've distilled the essence of control into
+              a single, intuitive interface. From the dynamic 'Structured
+              Reports' that provide granular insights into your operations to
+              the robust 'Cloud System' ensuring your data is accessible yet
+              secure — we've got you covered. Plus, with '24/7 Support', expert
+              assistance is just a click away, anytime, anywhere. Embrace the
+              art of effortless management. Explore Plyn's features, enhance
+              your productivity, and propel your projects to new heights.
+            </p>
+
+            <span className="mt-2 text-lg mb-4">
+              Begin your journey to project excellence
+            </span>
+            <button className="border py-5 rounded-full text-white w-3/12 bg-slate-900 mb-3">
+              Start you free trial
+            </button>
+          </div>
+
+          <div className="flex justify-center items-center gap-4 w-11/12">
+            <div className="flex items-center justify-around gap-4 w-full">
+              <div className="bg-[#0C1727] rounded-lg shadow-lg p-6 text-white flex flex-col items-center justify-center">
+                <h3 className="text-2xl font-semibold mb-1">Structured Reports</h3>
+                <ReportSvg/>
+                <p className="mt-4 text-gray-400">
+                  Dive deep into your project's analytics with Structured
+                  Reports. Our comprehensive reporting tools give you the
+                  insights needed to make informed decisions. Track progress,
+                  pinpoint areas for improvement, and celebrate milestones with
+                  detailed, data-driven reports that are both easy to understand
+                  and act upon.
+                </p>
+              </div>
+              <div className="bg-[#0C1727] rounded-lg shadow-lg flex flex-col items-center justify-center p-6 text-white">
+                <h3 className="text-2xl font-semibold">Cloud System</h3>
+                <Cloud />
+                <p className="mt-4 text-gray-400">
+                  Access your work anytime, anywhere with our Cloud System.
+                  Designed for flexibility and security, our cloud
+                  infrastructure ensures your data is safe, backed up, and
+                  within reach no matter where you are. Experience seamless
+                  collaboration and continuity across devices, empowering your
+                  team to be productive on-the-go.
+                </p>
+              </div>
+              <div className="bg-[#0C1727] rounded-lg shadow-lg p-6 text-white flex flex-col items-center justify-center">
+                <h3 className="text-2xl font-semibold">24/7 Support</h3>
+                <Support/>
+                <p className="mt-4 text-gray-400">
+                  Your peace of mind is paramount, which is why we offer 24/7
+                  Support. Day or night, our dedicated team is here to help you
+                  troubleshoot, guide you through features, and provide expert
+                  advice to keep your operations running smoothly. With our
+                  round-the-clock support, you’re never alone in your quest for
+                  project excellence.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );
