@@ -1,0 +1,87 @@
+const Hero = () => {
+  return (
+    <div className="flex flex-col items-center justify-center bg-white/95">
+      <div className="mb-16">
+        <img
+          className=" relative rounded-lg -mt-10 h-full w-full -mb-7 "
+          src="/bg-dashboard.jpg"
+          alt="Background Image Dashboard"
+        />
+      </div>
+
+      <section id="howWorks" className="text-black flex flex-col w-full">
+        <h1 className="text-6xl text-center  p-10">How it Works</h1>
+        <p className=" text-center text-xl mb-6">
+          Welcome to Plyn, a dynamic task and ticket management platform that
+          <br />
+          empowers teams to collaborate, plan, and execute projects with ease.
+          <br />
+          Plyn is designed to streamline your workflow, boost productivity, and
+          bring clarity to complex processes.
+        </p>
+
+        <div className=" flex flex-wrap justify-center gap-8 p-10 ">
+          <div className="flex-1 mb-3">
+            <ul>
+              <li className="font-bold text-2xl">Set Up Your Workspace</li>
+              <p className="font-sans pt-2 pb-1">
+                Start by customizing your workspace to fit the unique needs of
+                your team. Create boards for different projects, add lists to
+                categorize tasks, and generate individual tickets that capture
+                every detail—from deadlines and attachments to custom labels.
+              </p>
+
+              <li className="font-bold text-2xl mt-2">
+                Collaboration Made Simple
+              </li>
+              <p className="font-sans pt-2 pb-1 pr-1">
+                Invite team members to join your boards with just a few clicks.
+                Assign tasks, set priorities, and track progress through a
+                shared and transparent platform. Whether you're in the office or
+                on the go, Plyn keeps everyone synced and informed with
+                real-time updates and notifications.
+              </p>
+
+              <li className="font-bold text-2xl mt-2">Track and Adapt</li>
+              <p className="font-sans pt-2 pb-1 pr-1">
+                Visualize your project's trajectory with Plyn's intuitive
+                dashboard. Use filters to sort tasks, monitor due dates, and
+                adjust schedules as priorities shift. With our agile tools,
+                adapting to change is not just possible—it's effortless.
+              </p>
+
+              <li className="font-bold text-2xl mt-2">Integrate and Extend</li>
+              <p className="font-sans pt-2 pb-1 pr-1 ">
+                Plyn seamlessly integrates with your favorite tools, ensuring a
+                smooth workflow without the need to switch between apps. Plus,
+                with our extensive API, you can tailor Plyn to become the
+                heartbeat of your project management ecosystem.
+              </p>
+
+              <li className="font-bold text-2xl mt-2">Secure and Supportive</li>
+              <p className="font-sans pt-2 pb-1 pr-3">
+                We're committed to security and your success. With Plyn, your
+                data is protected with top-tier encryption, and our support team
+                is always ready to assist you.
+              </p>
+            </ul>
+          </div>
+          <div className="flex-1">
+            <img
+              className="object-cover rounded-md w-full h-auto"
+              src="./bg-dashboard.jpg"
+              alt=""
+            />
+          </div>
+        </div>
+        <h3 className="text-2xl text-center p-6">
+          Join Plyn today and transform the way you manage tasks and tickets.
+          It's more than a platform—it's <br /> the partner you need to achieve
+          project excellence.
+        </h3>
+      </section>
+    </div>
+  );
+};
+
+export default Hero;
