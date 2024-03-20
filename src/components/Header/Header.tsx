@@ -1,40 +1,13 @@
 import CheckMark from "../SvgComponents/CheckMark";
+import NavBar from "./NavBar/NavBar";
 
 const Header = () => {
+
   return (
     <>
       <section id="home" className="h-screen flex flex-col items-center relative justify-center text-white">
         <div className="bg-[url('/bg-image.jpg')] brightness-[0.3] absolute h-full w-full bg-cover"></div>
-        <nav className="flex z-30 backdrop-blur-sm justify-around w-full sticky p-4 sm:p-6 top-0 -mt-20">
-          <a className="p-2 sm:p-4" href="/">
-            <h1 className="text-xl sm:text-2xl">Plyn</h1>
-          </a>
-          <div className="hidden sm:flex items-center justify-center ">
-            <ul className="flex gap-4 sm:gap-6">
-              <li className="hover:text-gradient">
-                <a href="#home">Home</a>
-              </li>
-              <span>|</span>
-              <li className="hover:text-gradient">
-                <a href="#howWorks">How it Works</a>
-              </li>
-              <span>|</span>
-              <li className="hover:text-gradient">
-                <a href="">About Us</a>
-              </li>
-              <span>|</span>
-              <li className="hover:text-gradient">
-                <a href="">Contact Us</a>
-              </li>
-            </ul>
-          </div>
-          <div className="flex items-center gap-4">
-            <button className="rounded-full py-2 px-6">Login</button>
-            <button className="rounded-full bg-white text-black border py-2 px-6">
-              Register
-            </button>
-          </div>
-        </nav>
+        <NavBar style="-mt-20 backdrop-blur-sm"/>
         <div className="z-20 mt-24">
           <div className="text-center p-4 sm:p-6">
             <h1 className="text-5xl sm:text-7xl leading-normal text-gradient">

@@ -2,7 +2,7 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import Hero from "../../components/Hero/Hero";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div className="h-full w-full  bg-white/15">
       <div className="flex flex-col">
@@ -14,4 +14,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
