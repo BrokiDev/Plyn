@@ -7,7 +7,7 @@ const Header = () => {
     <>
       <section id="home" className="h-screen flex flex-col items-center relative justify-center text-white">
         <div className="bg-[url('/bg-image.jpg')] brightness-[0.3] absolute h-full w-full bg-cover"></div>
-        <NavBar style="-mt-20 backdrop-blur-sm"/>
+        <NavBar active={true} style="-mt-20 backdrop-blur-sm"/>
         <div className="z-20 mt-24">
           <div className="text-center p-4 sm:p-6">
             <h1 className="text-5xl sm:text-7xl leading-normal text-gradient">
