@@ -1,19 +1,62 @@
+import { useState } from "react";
 import NavBar from "../../components/Header/NavBar/NavBar";
+import { Toaster, toast } from "sonner";
+
+interface ILogin {
+  email: string;
+  password: string;
+}
+const validUser = {
+  email: "broki@gmail.com",
+  password: "1234",
+};
 
 const LoginPage = () => {
+  const [loginInfo, setLoginInfo] = useState<ILogin>({} as ILogin);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (
+      loginInfo.email === validUser.email &&
+      loginInfo.password === validUser.password
+    ) {
+      toast.success("Login Successful");
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 2500);
+    } else {
+      toast.error("Invalid Login");
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setLoginInfo((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
   return (
     <>
       <div className="bg-[url('/bg-login2.jpg')] brightness-[0.8] text-white bg-cover bg-no-repeat h-screen">
+        <Toaster richColors position="top-right" />
+
         <NavBar active={false} />
         <div className="flex justify-center items-center h-5/6">
           <div className="w-full sm:w-10/12 md:w-8/12 lg:w-5/12 h-5/6 bg-[url('/bg-login3.jpg')] bg-cover bg-center bg-no-repeat flex flex-col justify-center items-center rounded-xl p-6 sm:p-8 md:p-12 shadow-2xl mt-14">
             <div className="w-full flex flex-col items-center justify-center p-4 sm:p-8 md:p-10 backdrop-blur-sm bg-black/30 rounded-lg shadow-2xl">
               <h2 className="text-3xl md:text-4xl mb-8">Login</h2>
-              <form className="w-full flex flex-col items-center justify-center">
+              <form
+                onSubmit={handleSubmit}
+                className="w-full flex flex-col items-center justify-center"
+              >
                 <label htmlFor="email" className="text-xl md:text-2xl mb-2">
                   Email
                 </label>
                 <input
+                  value={loginInfo.email}
+                  onChange={handleChange}
+                  name="email"
                   id="email"
                   type="email"
                   placeholder="Enter your email"
@@ -23,6 +66,9 @@ const LoginPage = () => {
                   Password
                 </label>
                 <input
+                  value={loginInfo.password}
+                  onChange={handleChange}
+                  name="password"
                   id="password"
                   type="password"
                   placeholder="Enter your password"
@@ -38,12 +84,10 @@ const LoginPage = () => {
                   Forgot Your Password?
                 </a>
               </form>
-              <p className="mt-4 text-xl hover:text-gradient">
-                New Here?
-                <a href="">
-                  Sign Up
-                </a>
-              </p>
+
+              <a className="mt-4 text-xl hover:text-gradient" href="">
+                New Here? Sign Up
+              </a>
             </div>
           </div>
         </div>
