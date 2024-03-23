@@ -76,16 +76,16 @@ const LoginPage = () => {
                 />
                 <button
                   type="submit"
-                  className="w-full md:w-8/12 lg:w-6/12 p-2 rounded-md bg-white/95 text-black hover:bg-white/80 transition duration-300"
+                  className="w-full md:w-8/12 lg:w-6/12 p-2 rounded-md  bg-blue-500 text-white hover:bg-blue-400 transition duration-300"
                 >
-                  Login
+                  Sign In
                 </button>
                 <a href="" className="mt-8 text-white/80 hover:text-gradient">
                   Forgot Your Password?
                 </a>
               </form>
 
-              <a className="mt-4 text-xl hover:text-gradient" href="">
+              <a className="mt-4 text-xl hover:text-gradient" href="/register">
                 New Here? Sign Up
               </a>
             </div>

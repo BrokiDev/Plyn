@@ -6,17 +6,15 @@ import NotFound from "../pages/404-Page";
 const Router = () => {
   const HomePage = lazy(() => import("../pages/Home/Home"));
   const LoginPage = lazy(() => import("../pages/Login/index"));
+  const RegisterPage = lazy(() => import("../pages/Register/index"));
   return (
     <Routes>
-
-    <Route path="*" element={<NotFound/>}/>
+      <Route path="*" element={<NotFound />} />
 
       <Route
         path="/"
         element={
-          <Suspense
-            fallback={<Loader/>} 
-          >
+          <Suspense fallback={<Loader />}>
             <HomePage />
           </Suspense>
         }
@@ -25,7 +23,7 @@ const Router = () => {
       <Route
         path="/login"
         element={
-          <Suspense fallback={<Loader/>}>
+          <Suspense fallback={<Loader />}>
             <LoginPage />
           </Suspense>
         }
@@ -33,13 +31,11 @@ const Router = () => {
       <Route
         path="/register"
         element={
-          <Suspense fallback={<Loader/>}>
-            
+          <Suspense fallback={<Loader />}>
+            <RegisterPage />
           </Suspense>
         }
       />
-
-      
     </Routes>
   );
 };
