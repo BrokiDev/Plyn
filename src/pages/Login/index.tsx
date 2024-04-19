@@ -1,34 +1,16 @@
 import { useState } from "react";
 import NavBar from "../../components/Header/NavBar/NavBar";
 import { Toaster, toast } from "sonner";
+import { useSendData } from "../../providers/sendData";
 
 interface ILogin {
   email: string;
   password: string;
 }
-const validUser = {
-  email: "broki@gmail.com",
-  password: "1234",
-};
 
 const LoginPage = () => {
   const [loginInfo, setLoginInfo] = useState<ILogin>({} as ILogin);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (
-      loginInfo.email === validUser.email &&
-      loginInfo.password === validUser.password
-    ) {
-      toast.success("Login Successful");
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 2500);
-    } else {
-      toast.error("Invalid Login");
-    }
-  };
+  const { mutateAsync:mutateLogin } = useSendData('auth/login');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -36,6 +18,25 @@ const LoginPage = () => {
       return { ...prev, [name]: value };
     });
   };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+       const data = await mutateLogin(loginInfo);
+      if (data.status === "success") {
+        localStorage.setItem("SessionToken", JSON.stringify(data.data.token));
+        localStorage.setItem("UserInfo", JSON.stringify(data.data.user));
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 5000);
+      }
+      toast.success("Login Successful", { duration: 5000 });
+    } catch (error) {
+      console.error(error);
+      toast.error("Invalid email or password", { duration: 5000 });
+    }
+  };
+  
   return (
     <>
       <div className="bg-[url('/bg-login2.jpg')] brightness-[0.8] text-white bg-cover bg-no-repeat h-screen">

@@ -1,38 +1,40 @@
 import { useState } from "react";
 import NavBar from "../../components/Header/NavBar/NavBar";
 import { Toaster, toast } from "sonner";
+import { useSendData } from "../../providers/sendData";
 
-interface ILogin {
+interface IRegister {
+  fName: string;
+  lName: string;
+  companyName?: string;
   email: string;
   password: string;
 }
-const validUser = {
-  email: "broki@gmail.com",
-  password: "1234",
-};
+
 
 const RegisterPage = () => {
-  const [loginInfo, setLoginInfo] = useState<ILogin>({} as ILogin);
+  const [registerInfo, setRegisterInfo] = useState<IRegister>({} as IRegister);
+  const { mutateAsync } = useSendData("auth/register");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (
-      loginInfo.email === validUser.email &&
-      loginInfo.password === validUser.password
-    ) {
-      toast.success("Login Successful");
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 2500);
-    } else {
-      toast.error("Invalid Login");
+    try {
+      const dataRegister = await mutateAsync(registerInfo);
+      if (dataRegister) {
+        toast.success("Register Successful", { duration: 5000 });
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 5000);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Invalid Information Please try Again", { duration: 5000 });
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setLoginInfo((prev) => {
+    setRegisterInfo((prev) => {
       return { ...prev, [name]: value };
     });
   };
@@ -56,7 +58,7 @@ const RegisterPage = () => {
                       First Name
                     </label>
                     <input
-                      value={loginInfo.email}
+                      value={registerInfo.fName}
                       onChange={handleChange}
                       name="fName"
                       id="name"
@@ -74,7 +76,7 @@ const RegisterPage = () => {
                       Last Name
                     </label>
                     <input
-                      value={loginInfo.email}
+                      value={registerInfo.lName}
                       onChange={handleChange}
                       name="lName"
                       id="lastName"
@@ -92,9 +94,9 @@ const RegisterPage = () => {
                       Company Name
                     </label>
                     <input
-                      value={loginInfo.email}
+                      value={registerInfo.companyName}
                       onChange={handleChange}
-                      name="cName"
+                      name="companyName"
                       id="companyName"
                       type="text"
                       placeholder="Enter your company name"
@@ -107,7 +109,7 @@ const RegisterPage = () => {
                       Email
                     </label>
                     <input
-                      value={loginInfo.email}
+                      value={registerInfo.email}
                       onChange={handleChange}
                       name="email"
                       id="email"
@@ -124,7 +126,7 @@ const RegisterPage = () => {
                       Password
                     </label>
                     <input
-                      value={loginInfo.password}
+                      value={registerInfo.password}
                       onChange={handleChange}
                       name="password"
                       id="password"
