@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Loader from "../components/loader";
 import NotFound from "../pages/404-Page";
+import DashboardPage from "../pages/Dashboard";
 
 const Router = () => {
   const HomePage = lazy(() => import("../pages/Home/Home"));
@@ -33,6 +34,15 @@ const Router = () => {
         element={
           <Suspense fallback={<Loader />}>
             <RegisterPage />
+          </Suspense>
+        }
+      />
+
+      <Route
+        path="/dashboard"
+        element={
+          <Suspense fallback={<Loader />}>
+            <DashboardPage />
           </Suspense>
         }
       />
