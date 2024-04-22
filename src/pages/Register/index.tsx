@@ -11,9 +11,14 @@ interface IRegister {
   password: string;
 }
 
-
 const RegisterPage = () => {
-  const [registerInfo, setRegisterInfo] = useState<IRegister>({} as IRegister);
+  const [registerInfo, setRegisterInfo] = useState<IRegister>({
+    email: "",
+    fName: "",
+    lName: "",
+    password: "",
+    companyName: "",
+  });
   const { mutateAsync } = useSendData("auth/register");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

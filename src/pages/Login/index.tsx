@@ -9,7 +9,7 @@ interface ILogin {
 }
 
 const LoginPage = () => {
-  const [loginInfo, setLoginInfo] = useState<ILogin>({} as ILogin);
+  const [loginInfo, setLoginInfo] = useState<ILogin>({email: '',password:''});
   const { mutateAsync:mutateLogin } = useSendData('auth/login');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
