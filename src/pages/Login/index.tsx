@@ -9,8 +9,11 @@ interface ILogin {
 }
 
 const LoginPage = () => {
-  const [loginInfo, setLoginInfo] = useState<ILogin>({email: '',password:''});
-  const { mutateAsync:mutateLogin } = useSendData('auth/login');
+  const [loginInfo, setLoginInfo] = useState<ILogin>({
+    email: "",
+    password: "",
+  });
+  const { mutateAsync: mutateLogin } = useSendData("auth/login");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -22,21 +25,22 @@ const LoginPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-       const data = await mutateLogin(loginInfo);
+      const data = await mutateLogin(loginInfo);
       if (data.status === "success") {
         localStorage.setItem("SessionToken", JSON.stringify(data.data.token));
         localStorage.setItem("UserInfo", JSON.stringify(data.data.user));
         setTimeout(() => {
           window.location.href = "/";
         }, 5000);
+        toast.success("Login Successful", { duration: 5000 });
+      } else {
+        return toast.error(data.message, { duration: 5000 });
       }
-      toast.success("Login Successful", { duration: 5000 });
     } catch (error) {
       console.error(error);
-      toast.error("Invalid email or password", { duration: 5000 });
     }
   };
-  
+
   return (
     <>
       <div className="bg-[url('/bg-login2.jpg')] brightness-[0.8] text-white bg-cover bg-no-repeat h-screen">
