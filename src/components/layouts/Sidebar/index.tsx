@@ -60,27 +60,19 @@ const SideBar: React.FC<SideBarProps> = ({ items, title, children }) => {
 
   return (
     <div className="flex">
-      <div className="relative">
-
       <div
-        className={` absolute top-0 left-0 w-56 h-screen bg-gray-800 z-20  transition-transform duration-300 ease-in-out   md:static`}
+        className={`fixed top-0 left-0 h-screen bg-gray-900 w-56 transition-all duration-300 z-50 ${
+          toolbar ? "block" : "hidden"
+        } `}
       >
-        <div className="flex justify-between items-center bg-gray-800 p-4">
-          <h1
-            className={`text-2xl text-white ${
-              toolbar ? "block" : "hidden"
-            } md:block`}
-          >
-            {title}
-          </h1>
+        <div className="flex justify-between items-center bg-gray-900 p-4">
+          <h1 className="text-2xl text-white">{title}</h1>
           <i
-            className={`fa-solid ${
-              toolbar ? "fa-times" : "fa-bars"
-            } text-2xl text-white cursor-pointer`}
+            className="fa-solid fa-times text-2xl text-white cursor-pointer"
             onClick={showToolbar}
           ></i>
         </div>
-        <div className="flex flex-col gap-4 p-4">
+        <div className="flex flex-col gap-4 p-4 bg-gray-900">
           {items &&
             items.map((item, index) => (
               <div
@@ -95,23 +87,21 @@ const SideBar: React.FC<SideBarProps> = ({ items, title, children }) => {
             ))}
         </div>
       </div>
-      </div>
 
-      {/* Contenedor principal con transición de margen */}
       <div
-        className={`flex-1 transition-all duration-300 ${
+        className={`flex-1 transition-all duration-300  ${
           toolbar ? "ml-56" : "ml-0"
         }`}
       >
-        <div className="flex justify-between bg-gray-800 p-6">
+        <div className="flex justify-between bg-gray-900 p-6">
           <div className="flex items-center gap-4">
             {!toolbar && (
               <>
                 <i
-                  className={`fa-solid fa-bars text-2xl text-white cursor-pointer md:hidden`}
+                  className={`fa-solid fa-bars text-2xl text-white cursor-pointer`}
                   onClick={showToolbar}
                 ></i>
-                <h1 className="text-2xl text-white md:hidden">{title}</h1>
+                <h1 className="text-2xl text-white">{title}</h1>
               </>
             )}
           </div>
