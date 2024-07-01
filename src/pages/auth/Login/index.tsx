@@ -1,7 +1,8 @@
 import { useState } from "react";
-import NavBar from "../../components/Header/NavBar/NavBar";
+import { Link } from "react-router-dom";
 import { Toaster, toast } from "sonner";
-import { useSendData } from "../../providers/sendData";
+import NavBar from "../../../components/Header/NavBar/NavBar";
+import { useSignIn } from "../../../providers/auth/signIn";
 
 interface ILogin {
   email: string;
@@ -13,28 +14,28 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
-  const { mutateAsync: mutateLogin } = useSendData("auth/login");
-
+  const { mutateAsync: mutateLogin, } = useSignIn();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setLoginInfo((prev) => {
       return { ...prev, [name]: value };
     });
   };
+  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const data = await mutateLogin(loginInfo);
+      console.log(data);
+      console.log(data.status);
       if (data.status === "success") {
-        localStorage.setItem("SessionToken", JSON.stringify(data.data.token));
-        localStorage.setItem("UserInfo", JSON.stringify(data.data.user));
+        toast.success('Login Successful', { duration: 3000 });
         setTimeout(() => {
-          window.location.href = "/";
-        }, 5000);
-        toast.success("Login Successful", { duration: 5000 });
+          window.location.href = "/dashboard";
+        }, 3000);
       } else {
-        return toast.error(data.message, { duration: 5000 });
+        toast.error(data.message, { duration: 3000 });
       }
     } catch (error) {
       console.error(error);
@@ -85,14 +86,20 @@ const LoginPage = () => {
                 >
                   Sign In
                 </button>
-                <a href="" className="mt-8 text-white/80 hover:text-gradient">
+                <Link
+                  to="/auth/forgot-password"
+                  className="mt-8 text-white/80 hover:text-gradient"
+                >
                   Forgot Your Password?
-                </a>
+                </Link>
               </form>
 
-              <a className="mt-4 text-xl hover:text-gradient" href="/register">
+              <Link
+                className="mt-4 text-xl hover:text-gradient"
+                to="/auth/sign-up"
+              >
                 New Here? Sign Up
-              </a>
+              </Link>
             </div>
           </div>
         </div>

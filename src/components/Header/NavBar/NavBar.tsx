@@ -31,13 +31,13 @@ const NavBar = ({ style, active }: { style?: string; active: boolean }) => {
       {active && (
         <div className="flex items-center gap-4">
           <button
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/auth/sign-in")}
             className="rounded-full py-2 px-6"
           >
             Login
           </button>
           <button
-            onClick={() => navigate("/register")}
+            onClick={() => navigate("/auth/sign-up")}
             className="rounded-full bg-white text-black border py-2 px-6"
           >
             Register

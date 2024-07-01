@@ -1,29 +1,23 @@
-import { useMutation } from "@tanstack/react-query";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-type Data = {
-  email: string;
-  password: string;
+export interface BaseQueryParams {
+  url: string;
+  method?: string;
+  body?: any;
+  headers?: Record<string, string>;
+}
+
+const baseQuery = async <T>({ url, method = 'GET', body, headers = {} }: BaseQueryParams): Promise<T> => {
+  const response = await fetch(`${import.meta.env.VITE_BASE_API_URL}${url}`, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      ...headers,
+    },
+    body: JSON.stringify(body),
+    credentials: 'include',
+  });
+  return response.json();
 };
 
-export const useSendData = (option:string) => {
-  const { mutateAsync } = useMutation({
-    mutationKey: ['sendData'],
-    mutationFn: async (data:Data) => {
-      try {
-        const dataSend = await fetch(`${import.meta.env.VITE_BASE_API_URL}${option}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        })
-        return dataSend.json();
-        
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-});
-  return { mutateAsync };
-};
+export default baseQuery;

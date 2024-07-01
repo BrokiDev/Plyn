@@ -1,7 +1,8 @@
 import { useState } from "react";
-import NavBar from "../../components/Header/NavBar/NavBar";
+import NavBar from "../../../components/Header/NavBar/NavBar";
 import { Toaster, toast } from "sonner";
-import { useSendData } from "../../providers/sendData";
+import { Link } from "react-router-dom";
+import { useSignUp } from "../../../providers/auth/signUp";
 
 interface IRegister {
   fName: string;
@@ -19,17 +20,21 @@ const RegisterPage = () => {
     password: "",
     companyName: "",
   });
-  const { mutateAsync } = useSendData("auth/register");
+  const { mutateAsync } = useSignUp();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const dataRegister = await mutateAsync(registerInfo);
-      if (dataRegister) {
-        toast.success("Register Successful", { duration: 5000 });
+      console.log(dataRegister);
+      console.log(dataRegister.status);
+      if (dataRegister.status === "Success") {
+        toast.success("Register Successful", { duration: 3000 });
         setTimeout(() => {
-          window.location.href = "/login";
+          window.location.href = "/auth/sign-in";
         }, 5000);
+      }else{
+        toast.error(dataRegister.message, { duration: 5000 });
       }
     } catch (error) {
       console.error(error);
@@ -55,6 +60,7 @@ const RegisterPage = () => {
               <h2 className="text-3xl md:text-4xl mb-8">Register</h2>
               <form
                 onSubmit={handleSubmit}
+                autoComplete="off"
                 className="w-full flex flex-col items-center justify-center"
               >
                 <div className="w-full grid gap-4 ">
@@ -134,7 +140,6 @@ const RegisterPage = () => {
                       value={registerInfo.password}
                       onChange={handleChange}
                       name="password"
-                      id="password"
                       type="password"
                       placeholder="Enter your password"
                       className="w-full mb-6 p-2 rounded-md bg-transparent/25 text-white placeholder-white/75 focus:outline-none"
@@ -149,6 +154,7 @@ const RegisterPage = () => {
                       type="checkbox"
                       name="condition"
                       id="condition"
+                      required
                     />
                     <label htmlFor="condition" className="text-sm sm:text-base">
                       I agree to the Terms & Privacy
@@ -163,9 +169,9 @@ const RegisterPage = () => {
                 </div>
               </form>
 
-              <a className="mt-8 text-xl hover:text-gradient" href="/login">
+              <Link className="mt-8 text-xl hover:text-gradient" to="/auth/sign-in">
                 Already A Member? Log In
-              </a>
+              </Link>
             </div>
           </div>
         </div>
