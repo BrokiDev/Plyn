@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import baseQuery from "../../sendData";
+import baseQuery from "../../baseQuery";
 
 interface User {
     id: number;

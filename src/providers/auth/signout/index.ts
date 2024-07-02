@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import baseQuery from "../../sendData";
+import baseQuery from "../../baseQuery";
 
 
 interface Response {

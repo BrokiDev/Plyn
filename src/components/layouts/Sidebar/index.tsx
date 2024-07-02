@@ -10,9 +10,10 @@ interface SideBarProps {
     path: string;
     onClick?: () => void;
   }>;
+  name?: string;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ items, title, children }) => {
+const SideBar: React.FC<SideBarProps> = ({ items, title, children,name }) => {
   const [toolbar, setToolbar] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   const pathname = window.location.pathname;
@@ -108,10 +109,21 @@ const SideBar: React.FC<SideBarProps> = ({ items, title, children }) => {
           <div className="flex items-center gap-5">
             <i className="fa-solid fa-bell text-2xl text-white cursor-pointer"></i>
             <div className="relative pr-1">
-              <i
+              {/* <i
                 className="fa-solid fa-user text-2xl text-white cursor-pointer"
                 onClick={() => setDropdown(!dropdown)}
-              ></i>
+              ></i> */}
+              <div
+                onClick={() => setDropdown(!dropdown)}
+                className="flex items-center gap-2 cursor-pointer "
+              >
+                <div className="w-8 h-8 bg-blue-400 rounded-full">
+                  <div className="flex items-center justify-center h-full">
+                    <p className="text-white">{name}</p>
+                  </div>
+                </div>
+                <i className="fa-solid fa-chevron-down text-white"></i>
+              </div>
               <div
                 className={`absolute top-12 right-0 bg-gray-800 p-2 rounded-md text-white ${
                   dropdown ? "block" : "hidden"
@@ -125,10 +137,10 @@ const SideBar: React.FC<SideBarProps> = ({ items, title, children }) => {
                     {option.name === "logout" ? (
                       <div className="flex gap-2 items-center">
                         <i className={`${option.icon} text-white`}></i>
-                        <span onClick={handleLogout}>
+                        <button onClick={handleLogout}>
                           {option.name.charAt(0).toUpperCase() +
                             option.name.slice(1)}
-                        </span>
+                        </button>
                       </div>
                     ) : (
                       <div className="flex gap-2 items-center">
