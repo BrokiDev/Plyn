@@ -50,7 +50,7 @@ const RegisterPage = () => {
   };
   return (
     <>
-      <div className="bg-[url('/bg-login2.jpg')] brightness-[0.8] text-white bg-cover bg-no-repeat h-screen">
+      <div className="bg-[url('/bg-login2.jpg')] brightness-[0.8] text-white bg-cover bg-no-repeat ">
         <Toaster richColors position="top-right" />
 
         <NavBar active={false} />
@@ -160,9 +160,12 @@ const RegisterPage = () => {
                       I agree to the Terms & Privacy
                     </label>
                   </div>
+                </div>
+
+                <div className="w-full flex flex-col items-center mt-3">
                   <button
                     type="submit"
-                    className="w-full sm:w-auto sm:px-6 md:w-8/12  p-2 rounded-md bg-blue-500 text-white hover:bg-blue-400 transition duration-300"
+                    className="w-full md:w-8/12 lg:w-6/12 p-2 rounded-md  bg-blue-500 text-white hover:bg-blue-400 transition duration-300"
                   >
                     Create Account
                   </button>

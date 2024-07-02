@@ -12,8 +12,8 @@ const useAuth = () => {
             try {
                 const data = query;
                 if (data.data?.status === 'fail' || data.data?.status === 'error') {
-                    <Loader />;
                     navigate('/auth/sign-in');
+                    <Loader />;
                 }
             } catch (error) {
                 console.error(error);

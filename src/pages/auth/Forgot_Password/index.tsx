@@ -1,30 +1,43 @@
 import { FormEvent, useState } from "react";
 import { toast, Toaster } from "sonner";
 import NavBar from "../../../components/Header/NavBar/NavBar";
-import { useForgotPassword } from "../../../providers/forgotPassword";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useForgotPassword } from "../../../providers/auth/forgot-password";
+import Loader from "../../../components/loader";
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
-  const { mutateAsync } = useForgotPassword("auth/forgot-password");
+  const { mutateAsync } = useForgotPassword();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = await mutateAsync(email, {
-      onSuccess: () => {
-        setEmail("");
-        setTimeout(() => {
-            toast.success("Returning to login page...", { duration: 2000 });
-        }, 3000);
-        setTimeout(() => {
-          window.location.href = "/login";
-        }, 5000);
-      },
-    });
-    if (data.status === "success") {
-      toast.success(data.message, { duration: 3000 });
-    }
+    await mutateAsync({
+        email: email,
+
+    },{
+        onSuccess: (data) => {
+            console.log(data);
+            if (data.status === "success") {
+                toast.success(data.message, { duration: 3000 });
+                setTimeout(() => {
+                toast.success("Redirecting to Sign In Page", { duration: 2000 });
+                }, 2000);
+                setTimeout(() => {
+                    <Loader />;
+                    navigate("/auth/sign-in");
+
+                }, 5000);
+            } else {
+                toast.error(data.message, { duration: 5000 });
+            }
+        },
+        onError: (error) => {
+            console.error(error);
+            toast.error("Invalid Information Please try Again", { duration: 5000 });
+        },
+    })
   };
 
   return (
