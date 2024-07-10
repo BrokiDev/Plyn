@@ -11,6 +11,9 @@ const Router = () => {
     () => import("../pages/auth/Forgot_Password/index")
   );
   const DashboardPage = lazy(() => import("../pages/Dashboard/index"));
+  const VerifyEmailPage = lazy(
+    () => import("../pages/auth/verify-email/index")
+  );
   return (
     <Routes>
       <Route path="*" element={<NotFound />} />
@@ -53,6 +56,14 @@ const Router = () => {
           element={
             <Suspense fallback={<Loader />}>
               <ForgotPasswordPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="verify-email/:token"
+          element={
+            <Suspense fallback={<Loader />}>
+              <VerifyEmailPage />
             </Suspense>
           }
         />

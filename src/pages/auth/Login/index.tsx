@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import NavBar from "../../../components/Header/NavBar/NavBar";
 import { useSignIn } from "../../../providers/auth/signIn";
+import { useUser } from "../../../providers/auth/me";
+import Loader from "../../../components/loader";
 
 interface ILogin {
   email: string;
@@ -14,14 +16,14 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
-  const { mutateAsync: mutateLogin, } = useSignIn();
+  const { mutateAsync: mutateLogin } = useSignIn();
+  const { data } = useUser();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setLoginInfo((prev) => {
       return { ...prev, [name]: value };
     });
   };
-  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,7 +32,7 @@ const LoginPage = () => {
       console.log(data);
       console.log(data.status);
       if (data.status === "success") {
-        toast.success('Login Successful', { duration: 3000 });
+        toast.success("Login Successful", { duration: 3000 });
         setTimeout(() => {
           window.location.href = "/dashboard";
         }, 3000);
@@ -41,6 +43,13 @@ const LoginPage = () => {
       console.error(error);
     }
   };
+
+  useMemo(() => {
+    if (data?.status === "success") {
+      <Loader />;
+      window.location.href = "/dashboard";
+    }
+  }, [data]);
 
   return (
     <>
